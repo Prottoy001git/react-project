@@ -1,6 +1,8 @@
 function Sidebar() {
     return (
         <>
+            <input type="checkbox" id="sidebarMenu" className="d-none" />
+            <label htmlFor="sidebarMenu" className="bg-layer"></label>
             <aside id="layout-menu" className="layout-menu menu-vertical menu bg-menu-theme">
                 <div className="app-brand demo">
                     <a href="index.html" className="app-brand-link">
@@ -10,9 +12,9 @@ function Sidebar() {
                         <span className="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
                     </a>
 
-                    <a href="javascript:void(0);" className="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-                        <i className="bx bx-chevron-left bx-sm align-middle"></i>
-                    </a>
+                    <label htmlFor="sidebarMenu" className="menu-link text-large ms-auto d-block d-xl-none text-danger">
+                        <i className="bx bx-x bx-md align-middle"></i>
+                    </label>
                 </div>
 
                 <div className="menu-inner-shadow"></div>

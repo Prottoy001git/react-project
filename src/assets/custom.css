@@ -1,0 +1,21 @@
+@media (max-width: 1199.98px){
+    .layout-menu{
+        transform: translate3d(-100%, 0, 0);
+        transition: transform .3s ease-in-out !important;
+    }
+    #sidebarMenu:checked ~ .layout-menu{
+        transform: translate3d(0%, 0, 0) !important;
+    }
+    .bg-layer{
+        transition: all .3s ease-in-out;
+    }
+    #sidebarMenu:checked ~ .bg-layer{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1090;
+        background-color: rgb(67,89,113, .5);
+    }
+}
