@@ -19,3 +19,21 @@
         background-color: rgb(67,89,113, .5);
     }
 }
+.menu-sub{
+    display: block !important;
+    transition: all .3s ease-in-out !important;
+}
+.menu-sub.open{
+    max-height: 500px;
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.menu-sub.closed{
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}

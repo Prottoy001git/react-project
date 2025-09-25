@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom"
-import Dashboard from "../pages/Dashboard"
 import Footer from "./Footer"
 import Navbar from "./Navbar"
 import Sidebar from "./Sidebar"
