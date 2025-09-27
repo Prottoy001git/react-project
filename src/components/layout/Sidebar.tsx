@@ -27,7 +27,7 @@ function Sidebar() {
 
                 <ul className="menu-inner py-1">
                     {/* <!-- Dashboard --> */}
-                    <NavLink to="/dashboard" className={({isActive})=>isActive ? "menu-item active" : "menu-item"}>
+                    <NavLink to="/dashboard" className={({ isActive }) => isActive ? "menu-item active" : "menu-item"}>
                         <li className="menu-link">
                             <i className="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
@@ -56,6 +56,12 @@ function Sidebar() {
                         <li className="menu-link">
                             <i className="menu-icon tf-icons bx bx-briefcase-alt-2"></i>
                             <div data-i18n="Analytics">Roles</div>
+                        </li>
+                    </NavLink>
+                    <NavLink to="/posts" className="menu-item">
+                        <li className="menu-link">
+                            <i className="menu-icon tf-icons bx bx-message-minus"></i>
+                            <div data-i18n="Analytics">Posts</div>
                         </li>
                     </NavLink>
 
@@ -377,4 +383,4 @@ function Sidebar() {
     )
 }
 
-export default Sidebar
+export default Sidebar;
