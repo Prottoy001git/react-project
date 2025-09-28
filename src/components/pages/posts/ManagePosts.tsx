@@ -58,7 +58,7 @@ function ManagePosts() {
         <>
             <div className="container-xxl flex-grow-1 container-p-y">
                 <h4 className="fw-bold py-3 mb-4"><span className="text-muted fw-light">Posts /</span> Manage</h4>
-                <Link to="/posts/create" className="btn btn-success">Add New</Link>
+                <Link to="/post/create" className="btn btn-success">Add New</Link>
                 <div className="card mt-3">
                     <div className="table-responsive">
                         <table className="table table-striped">
@@ -97,9 +97,12 @@ function ManagePosts() {
                                             <td>{item.body}</td>
                                             <td>
                                                 <div className="d-flex gap-1">
-                                                    <button type="button" className="btn btn-icon btn-outline-primary">
+                                                    <Link to={`/post/details/${item.id}`} type="button" className="btn btn-icon btn-outline-info">
+                                                        <span className="tf-icons bx bx-search"></span>
+                                                    </Link>
+                                                    <Link to={`/post/edit/${item.id}`} type="button" className="btn btn-icon btn-outline-primary">
                                                         <span className="tf-icons bx bx-edit"></span>
-                                                    </button>
+                                                    </Link>
                                                     <button type="button" className="btn btn-icon btn-outline-danger">
                                                         <span className="tf-icons bx bx-trash"></span>
                                                     </button>

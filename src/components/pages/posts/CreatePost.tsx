@@ -12,8 +12,21 @@ function CreatePost() {
 
     // Axios API
     // ----------------------
-    function postData() {
-        alert('form submited successfully');
+    // for typescript to prevent form submition---use (parameter:type)(e:React.FormEvent)
+    function postData(e:React.FormEvent) {
+        e.preventDefault();
+        // alert('form submited successfully');
+        // console.log("Title: "+ title);
+        // console.log("Body: "+ body);
+        const data = {title, body};
+        axios.post("https://jsonplaceholder.typicode.com/posts", data)
+        .then((res)=>{
+            console.log(res.data);
+            setTitle("");
+            setBody("");
+            alert("Data Saved Successfully");
+        })
+        .catch((err)=>console.error(err));
     }
 
     return (
@@ -26,11 +39,11 @@ function CreatePost() {
                         <form onSubmit={postData}>
                             <div className="mb-3">
                                 <label className="form-label">Title</label>
-                                <input type="text" name="title" className="form-control" />
+                                <input type="text" name="title" className="form-control" value={title} onChange={(e)=>setTitle(e.target.value)}/>
                             </div>
                             <div className="mb-3">
                                 <label className="form-label">Body</label>
-                                <textarea name="body" className="form-control" rows={4}></textarea>
+                                <textarea name="body" className="form-control" rows={4} value={body} onChange={(e)=>setBody(e.target.value)}></textarea>
                             </div>
                             <button type="submit" className="btn btn-primary">Submit</button>
                         </form>
