@@ -1,89 +1,31 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-// type Post{
-//     userId: number | string;
-//     id:number;
-//     title:string;
-//     body:string;
-// }
-interface Post {
-    userId: number;
-    id: number;
-    title: string;
-    body: string;
-}
+import axios from "axios"
+import { Link } from "react-router-dom"
 
-function ManagePosts() {
-    const [posts, setPosts] = useState<Post[]>([]);
-
-    useEffect(() => {
-        document.title = "Manage Posts";
-        getData();
-    }, []);
-    useEffect(() => {
-        // console.log(posts);
-    }, [posts]);
-
-    // fetch API
-    // -----------------
-
-    // async function getData() {
-    //     try {
-    //         const res = await fetch('https://jsonplaceholder.typicode.com/posts')
-    //         const data = await res.json();
-    //         // console.log(data);
-    //         setPosts(data);
-    //     } catch (err) {
-    //         console.error(err);
-    //     }
-    // }
-    
-    // Axios API
-    // ----------------------
-    function getData(){
-        axios.get('https://jsonplaceholder.typicode.com/posts')
-        .then ((res)=>{
-            // console.log(res.data);
-            setPosts(res.data);
-        })
-        .catch((err)=>{
-            console.log(err);
-        });
-
-    }
-
-    const handleDelete = (id: number)=>{
-        // console.log(id+" confirm delete.");
-        axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
-        .then ((res)=>{
-            console.log(res);
-        })
-        .catch((err)=>{
-            console.error(err);
-        });
-    }
-
-
-
-    return (
-        <>
-            <div className="container-xxl flex-grow-1 container-p-y">
-                <h4 className="fw-bold py-3 mb-4"><span className="text-muted fw-light">Posts /</span> Manage</h4>
-                <Link to="/post/create" className="btn btn-success">Add New</Link>
+function ManageRoles() {
+    axios.get("http://localhost/php-react-api/api/roles")
+    .then((res)=>{
+        console.log(res);
+        // const posts = res.data;
+    })
+    .catch((err)=>{
+        console.error(err);
+    })
+  return (
+    <>
+        <div className="container-xxl flex-grow-1 container-p-y">
+                <h4 className="fw-bold py-3 mb-4"><span className="text-muted fw-light">Roles /</span> Manage</h4>
+                <Link to="" className="btn btn-success">Add New</Link>
                 <div className="card mt-3">
                     <div className="table-responsive">
                         <table className="table table-striped">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>User ID</th>
-                                    <th>Title</th>
-                                    <th>Body</th>
+                                    <th>Name</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            {/* <tbody>
                                 <tr>
                                     <td>1</td>
                                     <td>1</td>
@@ -123,13 +65,13 @@ function ManagePosts() {
                                         </tr>
                                     )
                                 }
-                            </tbody>
+                            </tbody> */}
                         </table>
                     </div>
                 </div>
             </div>
-        </>
-    )
+    </>
+  )
 }
 
-export default ManagePosts;
+export default ManageRoles

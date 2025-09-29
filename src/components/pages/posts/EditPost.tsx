@@ -30,7 +30,14 @@ function EditPost() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(post);
+        // console.log(post);
+        // to send data via post,put method use (URL, data)
+        axios.put(`https://jsonplaceholder.typicode.com/posts/${queryId}`, post)
+        .then((res)=>{
+            console.log(res);
+            alert("Data updated successfuly");
+        })
+        .catch((err)=>console.error(err));
     }
     return (
         <>

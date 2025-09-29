@@ -6,13 +6,13 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Layout from './components/layout/Layout.tsx'
 import Dashboard from './components/pages/Dashboard.tsx'
 import Products from './components/pages/Products.tsx'
-import Roles from './components/pages/Roles.tsx'
 import Sales from './components/pages/Sales.tsx'
 import Users from './components/pages/Users.tsx'
 import ManagePosts from './components/pages/posts/ManagePosts.tsx'
 import CreatePost from './components/pages/posts/CreatePost.tsx'
 import DetailsPost from './components/pages/posts/DetailsPost.tsx'
 import EditPost from './components/pages/posts/EditPost.tsx'
+import ManageRoles from './components/pages/roles/ManageRoles.tsx'
 
 const router = createBrowserRouter([
   {path: '/', element: <Layout />,
@@ -22,11 +22,11 @@ const router = createBrowserRouter([
       {path: '/products', element: <Products />},
       {path: '/sales', element: <Sales />},
       {path: '/users', element: <Users />},
-      {path: '/roles', element: <Roles />},
       {path: '/posts', element: <ManagePosts />},
       {path: '/post/create', element: <CreatePost />},
       {path: '/post/details/:id', element: <DetailsPost />},
       {path: '/post/edit/:id', element: <EditPost />},
+      {path: '/roles', element: <ManageRoles />},
     ]
   },
   {path: '/pos', element: <h1>POS</h1>},
