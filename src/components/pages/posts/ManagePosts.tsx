@@ -38,30 +38,30 @@ function ManagePosts() {
     //         console.error(err);
     //     }
     // }
-    
+
     // Axios API
     // ----------------------
-    function getData(){
+    function getData() {
         axios.get('https://jsonplaceholder.typicode.com/posts')
-        .then ((res)=>{
-            // console.log(res.data);
-            setPosts(res.data);
-        })
-        .catch((err)=>{
-            console.log(err);
-        });
+            .then((res) => {
+                // console.log(res.data);
+                setPosts(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
 
     }
 
-    const handleDelete = (id: number)=>{
+    const handleDelete = (id: number) => {
         // console.log(id+" confirm delete.");
         axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
-        .then ((res)=>{
-            console.log(res);
-        })
-        .catch((err)=>{
-            console.error(err);
-        });
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
     }
 
 
@@ -84,22 +84,6 @@ function ManagePosts() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>Test</td>
-                                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem ipsum alias, numquam, magnam ratione temporibus ullam aspernatur</td>
-                                    <td>
-                                        <div className="d-flex gap-1">
-                                            <button type="button" className="btn btn-icon btn-outline-primary">
-                                                <span className="tf-icons bx bx-edit"></span>
-                                            </button>
-                                            <button type="button" className="btn btn-icon btn-outline-danger">
-                                                <span className="tf-icons bx bx-trash"></span>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
                                 {
                                     posts.map((item) =>
                                         <tr key={item.id}>
@@ -115,7 +99,7 @@ function ManagePosts() {
                                                     <Link to={`/post/edit/${item.id}`} type="button" className="btn btn-icon btn-outline-primary">
                                                         <span className="tf-icons bx bx-edit"></span>
                                                     </Link>
-                                                    <button onClick={()=>{confirm("Are you sure to delete?") && handleDelete(item.id)}} type="button" className="btn btn-icon btn-outline-danger">
+                                                    <button onClick={() => { confirm("Are you sure to delete?") && handleDelete(item.id) }} type="button" className="btn btn-icon btn-outline-danger">
                                                         <span className="tf-icons bx bx-trash"></span>
                                                     </button>
                                                 </div>
