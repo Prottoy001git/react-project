@@ -1,11 +1,7 @@
-import axios from "axios"
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom"
-
-export interface Role {
-    id: number;
-    name: string;
-}
+import api from "../../../config";
+import type { Role } from "../../../interfaces/role.interface";
 
 function ManageRoles() {
     const [roles, setRoles] = useState<Role[]>([]);
@@ -19,9 +15,9 @@ function ManageRoles() {
 
 
     function getRoles(){
-        axios.get("http://localhost/php-react-api/api/roles")
+        api.get("roles")
         .then((res)=>{
-            console.log(res.data);
+            // console.log(res.data);
             setRoles(res.data);
         })
         .catch((err)=>{

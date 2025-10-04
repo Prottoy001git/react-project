@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import type { Role } from "./ManageRoles"
-import axios from "axios";
+import api from "../../../config";
+import type { Role } from "../../../interfaces/role.interface";
 
 function CreateRole() {
     const[role, setRole] = useState<Role>({
@@ -11,7 +11,7 @@ function CreateRole() {
 
     const handleSubmit = (e:React.FormEvent) => {
         e.preventDefault();
-        axios.post("http://localhost/php-react-api/api/create-role", role)
+        api.post("create-role", role)
             .then((res) => {
                 console.log(res);
                 alert("Data Saved Successfully");
@@ -27,7 +27,7 @@ function CreateRole() {
                 <div className="card mt-3">
                     <h5 className="card-header">Create Role</h5>
                     <div className="card-body">
-                        <form method="post" onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit}>
                             <div className="mb-3">
                                 <label className="form-label">Title</label>
                                 <input type="text" name="title" className="form-control" value={role.name} onChange={(e)=>setRole({...role, name:e.target.value})} />
