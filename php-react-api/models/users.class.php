@@ -71,7 +71,7 @@ class Users {
         $sql = "DELETE FROM ecom_users WHERE id = $id";
         if ($db->query($sql)) {
           if ($db->affected_rows > 0) {
-            return "Delete successful.";
+            return "Id $id Delete successful.";
           } else {
             return "No record found with ID $id.";
           }

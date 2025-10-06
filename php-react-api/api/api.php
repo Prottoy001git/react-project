@@ -4,7 +4,7 @@ require_once('../config/db.php');
 
 // header("Access-Control-Allow-Origin: http://localhost:5173");   // for individual access local or hosting url
 header("Access-Control-Allow-Origin: *");  // for universal access
-// header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");  
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");  
 header("Access-Control-Allow-Headers: Content-Type");  
 
 
@@ -23,6 +23,7 @@ foreach(glob("*-api.php") as $filename) {
     include_once($filename);
 }
 include_once("../helper/img-upload-helper.php");
+include_once("../helper/jwt.php");
 
 $request = $_SERVER['REQUEST_METHOD'];
 
@@ -43,6 +44,16 @@ if(isset($_GET['method'])) {
         // echo json_encode($_POST);
         // echo json_encode($_FILES);
         createUser($_POST,$_FILES);
+    }else if($endpoint == 'delete-user' && $request == 'DELETE') {
+        // echo json_encode($_GET['id']);
+        deleteUser($_GET['id']);
+    }else if($endpoint == 'token' && $request == 'GET') {
+        $data = [
+            "name" => "Prottoy",
+            "email"=> "prottoy@mail.com",
+            "role" => "Admin"
+        ];
+        echo json_encode ("Bearer token: ".generateJWT($data));
     }else{
         echo "This url '$endpoint' not found!";
     }

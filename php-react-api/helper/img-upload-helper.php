@@ -47,6 +47,8 @@ function imgUpload($file, $path = "uploads", $name = "", $maxKb = 500) {
         return ['error' => 'Failed to move uploaded file'];
     }
 
+    $fullPath = preg_replace('#^(\.\./|\./|/)+#', '', $fullPath);
+
     return ['success' => $fullPath];
 }
 
