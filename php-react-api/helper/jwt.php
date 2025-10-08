@@ -1,7 +1,7 @@
 <?php
 require_once "../vendor/autoload.php";
 use Firebase\JWT\JWT;   //built in class to create jwt token
-use Firebase\JWT\key;   //
+use Firebase\JWT\key;   //built in class to validate jwt token
 
 $config = include('../config/secret.php');
 
@@ -13,12 +13,12 @@ function generateJWT($payload, $expiry = 3600) {    //this function generates jw
         'iat' => $issuedAt,
         'exp' => $expire
     ]);
-    return JWT::encode($tokenPayload, $config['secret_key_jwt'], 'HS256');  // use the secret file array key, the value will be applied
+    return JWT::encode($tokenPayload, $config['secret_key_jwt'], 'HS256');  // use the secret file array key, the value will be applied.....HS256 is default algorithm
 }
 
 function validateJWT($jwt) {                        //this function validates jwt token
     global $config;
-    return JWT::decode($jwt, new Key($config['jwt_secret'], 'HS256'));
+    return JWT::decode($jwt, new Key($config['secret_key_jwt'], 'HS256'));  //  use the secret file array key.....HS256 is default algorithm
 }
 
 ?>

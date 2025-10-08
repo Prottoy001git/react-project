@@ -5,7 +5,8 @@ const baseApiUrl = "http://localhost/php-react-api/api/";   //use hosting URL fo
 const api = axios.create({
     baseURL: baseApiUrl,
     headers:{
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiUHJvdHRveSIsImVtYWlsIjoicHJvdHRveUBtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTc1OTkwMTYyOSwiZXhwIjoxNzU5OTAxNjg5fQ.NDrW_s_Bij9DcmQSxsmIEEIxqnewaCrz9I8eFSCEqGk"
     }
 });
 

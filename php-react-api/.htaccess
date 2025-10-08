@@ -1,6 +1,6 @@
 RewriteEngine On
 
-RewriteRule ^api/(.*)$ api/api.php?method=$1 [L,QSA]
+RewriteRule ^api/(.*)$ api/api.php?endpoint=$1 [L,QSA]
 
 # Redirect all requests not for existing files/directories to index.php
 RewriteCond %{REQUEST_FILENAME} !-f
