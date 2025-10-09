@@ -79,4 +79,20 @@ class Users {
           return "Delete failed: " . $db->error;
         }
     }
+    public static function login($_email, $_password) {
+        global $db;
+        $sql ="SELECT * from ecom_users WHERE email = '{$_email}' AND password = '$_password'";
+
+        $res = $db->query($sql);
+        if($res){
+          if($res->num_rows > 0){
+            return ["success" => "Login successful", "user_data" => $res->fetch_assoc()];
+          }else{
+            return ["error" => "Invalid email or password"];
+          }
+          return $res->fetch_assoc();
+        }else{
+          return "Query failed: " . $db->error;
+        }
+    }
 }

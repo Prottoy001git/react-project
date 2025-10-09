@@ -15,6 +15,7 @@ import ManageRoles from './components/pages/roles/ManageRoles.tsx'
 import CreateRole from './components/pages/roles/CreateRole.tsx'
 import ManageUsers from './components/pages/users/ManageUsers.tsx'
 import CreateUser from './components/pages/users/CreateUser.tsx'
+import Login from './components/pages/login.tsx'
 
 const router = createBrowserRouter([
   {
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
     ]
   },
   { path: '/pos', element: <h1>POS</h1> },
-  { path: '/login', element: <h1>login</h1> },
+  { path: '/login', element: <Login /> },
   { path: '*', element: <h1 className="text-danger text-center">404 Page Not Found</h1> },
 ]);
 

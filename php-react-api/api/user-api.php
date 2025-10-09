@@ -22,3 +22,7 @@ function deleteUser($_id)
 {
     echo json_encode(Users::delete($_id));
 }
+function login($data){
+    echo json_encode(Users::login($data["email"], $data["password"]));
+}
+?>
