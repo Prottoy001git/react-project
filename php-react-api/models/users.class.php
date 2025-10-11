@@ -81,12 +81,18 @@ class Users {
     }
     public static function login($_email, $_password) {
         global $db;
-        $sql ="SELECT * from ecom_users WHERE email = '{$_email}' AND password = '$_password'";
+        $sql ="SELECT u.name, u.email, r.name as role, u.photo 
+               from ecom_users u, ecom_roles r 
+               WHERE email = '{$_email}' AND password = '$_password' AND u.role_id = r.id";
 
         $res = $db->query($sql);
         if($res){
           if($res->num_rows > 0){
-            return ["success" => "Login successful", "user_data" => $res->fetch_assoc()];
+            $result = $res->fetch_assoc();
+            $token = generateJWT($result, 60*60*24*7); 
+            return ["success" => "Login successful", 
+            "user_data" => $result,
+            "token" => $token];
           }else{
             return ["error" => "Invalid email or password"];
           }

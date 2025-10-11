@@ -15,11 +15,12 @@ import ManageRoles from './components/pages/roles/ManageRoles.tsx'
 import CreateRole from './components/pages/roles/CreateRole.tsx'
 import ManageUsers from './components/pages/users/ManageUsers.tsx'
 import CreateUser from './components/pages/users/CreateUser.tsx'
-import Login from './components/pages/login.tsx'
+import Login from './components/pages/Login.tsx'
+import { requireAuth, redirectIfAuthenticated} from './utils/auth.ts'
 
 const router = createBrowserRouter([
   {
-    path: '/', element: <Layout />,
+    path: '/', element: <Layout />, loader: requireAuth,
     children: [
       { index: true, element: <Dashboard /> },
       { path: '/dashboard', element: <Dashboard /> },
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
     ]
   },
   { path: '/pos', element: <h1>POS</h1> },
-  { path: '/login', element: <Login /> },
+  { path: '/login', element: <Login /> , loader: redirectIfAuthenticated}, 
   { path: '*', element: <h1 className="text-danger text-center">404 Page Not Found</h1> },
 ]);
 

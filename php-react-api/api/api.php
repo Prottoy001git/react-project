@@ -7,6 +7,9 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 // echo "API Working <br>";
 require_once('../config/db.php');
 
+include_once("../helper/img-upload-helper.php");
+include_once("../helper/jwt.php");
+
 // require_once('../models/products.class.php');
 // require_once('../models/orders.class.php');
 // OR
@@ -20,8 +23,6 @@ foreach (glob("../models/*.class.php") as $filename) {
 foreach (glob("*-api.php") as $filename) {
     include_once($filename);
 }
-include_once("../helper/img-upload-helper.php");
-include_once("../helper/jwt.php");
 
 if($_SERVER['REQUEST_METHOD'] == 'OPTIONS'){
     http_response_code(200);
@@ -48,22 +49,22 @@ if ($endpoint == 'login' && $request == 'POST') {
     ];
     echo json_encode(generateJWT($data, 60 * 60 * 24 * 7));
 } else {
-    // $headers = getallheaders();
-    // $auth_header = $headers['Authorization'] ?? '';
-    // if (!$auth_header) {
-    //     http_response_code(401);
-    //     echo json_encode(["error" => "No token provided"]);
-    //     exit;
-    // }
-    // $bearer_token = explode(' ', $auth_header);
-    // $token = $bearer_token[1];
-    // try {
-    //     $decoded = validateJWT($token);
-    // } catch (Exception $e) {
-    //     http_response_code(401);
-    //     echo json_encode(["error" => "Invalid or expired token"]);
-    //     exit;
-    // }
+    $headers = getallheaders();
+    $auth_header = $headers['Authorization'] ?? '';
+    if (!$auth_header) {
+        http_response_code(401);
+        echo json_encode(["error" => "No token provided"]);
+        exit;
+    }
+    $bearer_token = explode(' ', $auth_header);
+    $token = $bearer_token[1];
+    try {
+        $decoded = validateJWT($token);
+    } catch (Exception $e) {
+        http_response_code(401);
+        echo json_encode(["error" => "Invalid or expired token"]);
+        exit;
+    }
 
     if (isset($_GET['endpoint'])) {
         $endpoint = $_GET['endpoint'];
