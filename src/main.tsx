@@ -18,6 +18,12 @@ import CreateUser from './components/pages/users/CreateUser.tsx'
 import Login from './components/pages/Login.tsx'
 import { requireAuth, redirectIfAuthenticated} from './utils/auth.ts'
 
+// DataTable
+import DataTable from 'datatables.net-react';
+import DT from 'datatables.net-dt';
+ 
+DataTable.use(DT);
+
 const router = createBrowserRouter([
   {
     path: '/', element: <Layout />, loader: requireAuth,

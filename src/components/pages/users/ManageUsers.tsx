@@ -1,17 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import api from "../../../config";
 import { Link } from "react-router-dom";
 import type { User } from "../../../interfaces/user.interface";
+import DataTable from 'datatables.net-dt';
+import 'datatables.net-dt/css/dataTables.dataTables.css'; // include styles
 
 function ManageUsers() {
     const [users, setUsers] = useState<User[]>([]);
     const [userId, setUserId] = useState<number | undefined>(0);
+    const tableRef = useRef<HTMLTableElement>(null);
 
-    useEffect(() => {
-        document.title = "Manage Users";
-        getUsers();
-    })
-    const getUsers = () => {
+     const getUsers = () => {
         api.get("users")
             .then((res) => {
                 // console.log(res.data);
@@ -20,24 +19,40 @@ function ManageUsers() {
             .catch((err) => { console.error(err) });
     }
 
+    useEffect(() => {
+        document.title = "Manage Users";
+        getUsers();
+    },[]);
+
+    useEffect(() => {
+        if (users.length > 0 && tableRef.current) {
+        // Initialize DataTable
+        const dt = new DataTable(tableRef.current);
+        return () => {
+            dt.destroy();
+        };
+        }
+    }, [users]);
+
+
     // function handleDelete(id: any){
-    function handleDelete(user_id: any){
+    function handleDelete(user_id: any) {
         // alert("delete id: "+id);
-        
+
         // api.delete(`delete-user?id=${id}`)
-        api.delete(`delete-user`,{
-            params:{
+        api.delete(`delete-user`, {
+            params: {
                 id: user_id,
                 name: "Asia",
             }
         })
-        .then((res) => {
-            console.log(res.data);
-            getUsers();
-        })
-        .catch((err) => {
-            console.error(err);
-        })
+            .then((res) => {
+                console.log(res.data);
+                getUsers();
+            })
+            .catch((err) => {
+                console.error(err);
+            })
     }
     return (
         <>
@@ -46,7 +61,7 @@ function ManageUsers() {
                 <Link to="/create-user" className="btn btn-success">Add New</Link>
                 <div className="card mt-3">
                     <div className="table-responsive">
-                        <table className="table table-striped">
+                        <table ref={tableRef} className="table table-striped">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -102,7 +117,7 @@ function ManageUsers() {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={()=>handleDelete(userId)}>Delete</button>
+                            <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => handleDelete(userId)}>Delete</button>
                         </div>
                     </div>
                 </div>
