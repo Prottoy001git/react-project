@@ -10,7 +10,7 @@ function ManageUsers() {
     const [userId, setUserId] = useState<number | undefined>(0);
     const tableRef = useRef<HTMLTableElement>(null);
 
-     const getUsers = () => {
+    const getUsers = () => {
         api.get("users")
             .then((res) => {
                 // console.log(res.data);
@@ -22,15 +22,15 @@ function ManageUsers() {
     useEffect(() => {
         document.title = "Manage Users";
         getUsers();
-    },[]);
+    }, []);
 
     useEffect(() => {
         if (users.length > 0 && tableRef.current) {
-        // Initialize DataTable
-        const dt = new DataTable(tableRef.current);
-        return () => {
-            dt.destroy();
-        };
+            // Initialize DataTable
+            const dt = new DataTable(tableRef.current);
+            return () => {
+                dt.destroy();
+            };
         }
     }, [users]);
 
@@ -77,7 +77,14 @@ function ManageUsers() {
                                         return (
                                             <tr key={user.id}>
                                                 <td>{user.id}</td>
-                                                <td>{user.name}</td>
+                                                <td>{user.name}{user.photo && (
+                                                    <img
+                                                        src={`http://localhost/php-react-api/${user.photo}`}
+                                                        alt={user.name}
+                                                        style={{ width: "40px", height: "40px", objectFit: "cover", borderRadius: "50%" }}
+                                                    />
+                                                )}
+                                                </td>
                                                 <td>{user.email}</td>
                                                 <td>{user.role}</td>
                                                 <td>

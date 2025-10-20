@@ -5,6 +5,7 @@ import type { Role } from "../../../interfaces/role.interface";
 
 function ManageRoles() {
     const [roles, setRoles] = useState<Role[]>([]);
+    const [search, setSearch] = useState<string>("");
 
     useEffect(()=>{
         getRoles();
@@ -24,12 +25,16 @@ function ManageRoles() {
             console.error(err);
         })
     }
+    const handleFilter =() =>{
+        console.log(search);
+    }
 
   return (
     <>
         <div className="container-xxl flex-grow-1 container-p-y">
                 <h4 className="fw-bold py-3 mb-4"><span className="text-muted fw-light">Roles /</span> Manage</h4>
                 <Link to="/create-role" className="btn btn-success">Add New</Link>
+                    <input type="text" className="form-control" placeholder="Search..." value={search} onChange={(e)=>setSearch(e.target.value)} onKeyUp={handleFilter} />
                 <div className="card mt-3">
                     <div className="table-responsive">
                         <table className="table table-striped">
